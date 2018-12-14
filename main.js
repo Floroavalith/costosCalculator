@@ -34,6 +34,7 @@ function GeneratePeopleInputs(){
         valueInput = document.createElement('input');
         valueInput.setAttribute("id", "amount"+i);
         valueInput.setAttribute("placeholder", "$0.00");
+        valueInput.setAttribute("onkeypress", "return isNumberKey(event)");
         valueInput.setAttribute("class", "Person");
         valueInput.setAttribute("class", "Amount");
 
@@ -56,7 +57,7 @@ function CalculaTotal(){
     //cuando debe pagar cada uno redondeado hacia abajo.
     amountEach = Math.floor((total/people.length)*100)/100;
 
-    document.getElementById("pTotal").innerHTML = "Total: " + total;
+    document.getElementById("pTotal").innerHTML = "TOTAL: " + total;
     document.getElementById("pEach").innerHTML = "Each should pay: " + amountEach;
 }
 
@@ -166,4 +167,13 @@ function MuestraQuienPagaAQuien(){
             paraReceiveFrom.appendChild(text);
         });
     });
+}
+
+function isNumberKey(evt)
+{
+   var charCode = (evt.which) ? evt.which : event.keyCode
+   if (charCode > 31 && (charCode < 48 || charCode > 57))
+      return false;
+
+   return true;
 }
